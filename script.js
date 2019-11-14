@@ -4,15 +4,9 @@ var input = document.querySelector("input");
 var list = [];
 var listCount = 0;
 
-// if(list.length === 0){
-//     const message = document.createElement("h4");
-//     message.textContent = "your to-do list is empty";
-//     message.classList.add("message");
-//     document.querySelector("#todo-container").append(message);
-// }
-
 formSubmit.addEventListener("submit", function(e){
     e.preventDefault();
+    list.push(input.value);
     let inputText = input.value;
     let todo = document.createElement("li");
     todo.textContent = inputText;
