@@ -3,18 +3,20 @@
 <head>
     <title>To Do App</title>
     <link rel="stylesheet" href="style.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="container">
         <div id="header-container">
-            <h1>To Do Application</h1>            
+            <h1>To Do Application</h1>
+            <span id="show-input">+</span>
         </div>
         <div id="todo-container">
             <form id="form-id">
-                <input type="input" required>
-                <input type="submit">
+                <input type="input" placeholder="Enter your task here." required>
+                
             </form>
-            <ul></ul>
+            <ul id="todos"></ul>
         </div>
     </div>
 

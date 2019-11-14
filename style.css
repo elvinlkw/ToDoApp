@@ -1,0 +1,66 @@
+.hidden{
+    display:none;
+}
+
+.message{
+    margin: 0.5em;
+    text-align: center;
+    opacity: 0.3;
+    font-style: italic;
+}
+
+#container{
+    font-family: 'Lato', sans-serif;
+    width: 40%;
+    margin: 2em auto; padding: 0;
+    border: 2px lightgray solid;
+}
+
+#header-container{
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid lightgray;
+}
+
+#header-container h1{
+    margin: 0;
+}
+
+#header-container span{
+    cursor: pointer;
+    font-size: 2em;
+    user-select: none;
+    padding-right: 5px;
+}
+
+#header-container span:hover{
+    font-weight: bold;
+}
+
+#todo-container{
+    width: 100%;
+    margin: 0 auto;
+}
+
+input[type=input]{
+    width: 100%;
+    text-align: center;
+    padding: 0.75em 0 0.75em 0;
+    box-sizing: border-box;
+    border:0;
+    background-color: aliceblue;
+}
+
+#todos{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#todos .item{
+    padding: 1em 0;
+    padding-left: 1em;
+}
