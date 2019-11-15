@@ -2,6 +2,7 @@ $(document).ready(function(){
     var $formSubmit = $("#form-id");
     var $showbar = $("#show-input");
     var $input = $("input");
+    var $list = $(".item");
     var list = [];
     var listCount = 0;
 
@@ -9,7 +10,7 @@ $(document).ready(function(){
         e.preventDefault();
         let background;
         let inputText = $input.val();
-        list.push(inputText);
+        list.text = inputText;
 
         if(listCount % 2 === 0){background = "#eee";}
         else{background = "lightgray";}
@@ -24,10 +25,24 @@ $(document).ready(function(){
     $showbar.click(function(){
         $input.toggleClass("hidden");
     });
+
+    $("li").click(function(){
+        if($(this).css("opacity") === "0.5"){
+            $(this).removeClass("completed");
+            list.completed = false;
+        }else{
+            $(this).addClass("completed");
+            list.completed = true;
+        }
+    });
+
+    $(".delete").click(function(){
+        $(this).closest(".item").remove();
+    });
 });
 
 function addList(todo){
     return (
-        `<li class="item">${todo}</li>`
+        `<li class="item"><span>X</span> ${todo}</li>`
     );
 }
