@@ -8,10 +8,28 @@ $(document).ready(function(){
     var list = [];
     var listCount = 0;
 
+    // Preload List if exist
+    if(localStorage.getItem("todos")){
+        let background;
+        list = JSON.parse(localStorage.getItem("todos"));
+        for(let i = 0; i < list.length; i++){
+            if(listCount % 2 === 0){background = "#eee";}
+            else{background = "lightgray";}
+            $("#todos").append(addList(list[i].text));
+            $('.item:last-child').css(
+                "background-color", `${background}`);
+            if(list[i].completed === true){
+                $(`.item:nth-child(${i+1})`).addClass("completed");
+            }
+            listCount += 1;
+        }
+    }
+
     $formSubmit.submit(function(e){
         e.preventDefault();
         let background;
         let inputText = $input.val();
+        $("#todos").show();
         list.push({
             text: inputText,
             completed: false
@@ -23,7 +41,9 @@ $(document).ready(function(){
             "background-color", `${background}`);
         $input.val("");
         listCount += 1;
-        console.log(list);
+        
+        let storageSerialized = JSON.stringify(list);
+        localStorage.setItem("todos", storageSerialized);
     });
 
     $showbar.click(function(){
@@ -49,12 +69,15 @@ $(document).ready(function(){
                 }
             }
         }
-        console.log(list);
+        let storageSerialized = JSON.stringify(list);
+        localStorage.setItem("todos", storageSerialized);
     });
 
     $("#todos").on("click", '.delete', function(event){
         event.stopPropagation();
         $(this).closest('.item').remove();
+        let storageSerialized = JSON.stringify(list);
+        localStorage.setItem("todos", storageSerialized);
     });
 
     // Handler for managing the delete button to appear
@@ -98,7 +121,8 @@ $(document).ready(function(){
                 list[i].completed = true;
             }
         }
-        console.log(list);
+        let storageSerialized = JSON.stringify(list);
+        localStorage.setItem("todos", storageSerialized);
     });
 
     $delAll.click(function(e){
@@ -110,6 +134,8 @@ $(document).ready(function(){
             $("#todos").slideUp();
             $(".item").remove();
         }
+        let storageSerialized = JSON.stringify(list);
+        localStorage.setItem("todos", storageSerialized);
     });
 });
 
