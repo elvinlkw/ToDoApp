@@ -77,3 +77,21 @@ input[type=input]{
     cursor: pointer;
     margin-right: 1em;
 }
+
+#commands-container{
+    height: 3em;
+    display: flex;
+}
+
+.command-wrapper{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #eee;
+    width: 33%;
+}
+
+.command-wrapper button{
+    background-color: #b0c4de;
+    height: 2em;
+}

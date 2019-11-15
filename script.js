@@ -2,6 +2,7 @@ $(document).ready(function(){
     var $formSubmit = $("#form-id");
     var $showbar = $("#show-input");
     var $input = $("input");
+    var $command = $("button");
     var list = [];
     var listCount = 0;
 
@@ -62,6 +63,25 @@ $(document).ready(function(){
     });
     $("#todos").on("mouseout", '.item', function(){
         $(this).find("img").toggleClass("hidden");
+    });
+
+    // Handler for buttons presses
+    $command.click(function(){
+        if($(this).text() === "Hide Completed"){
+            $(this).text("Show Completed");
+            for(let i = 0; i < list.length; i++){
+                if(list[i].completed === true){
+                    $(`li:nth-child(${[i+1]})`).hide();
+                }
+            }
+        }else if($(this).text() === "Show Completed"){
+            $(this).text("Hide Completed");
+            for(let i = 0; i < list.length; i++){
+                if(list[i].completed === true){
+                    $(`li:nth-child(${[i+1]})`).show();
+                }
+            }
+        }
     });
 });
 
