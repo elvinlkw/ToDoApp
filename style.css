@@ -61,11 +61,19 @@ input[type=input]{
 }
 
 #todos .item{
-    padding-left: 1em;
     height: 2em;
+    display: flex;
+    align-items: center;
+    padding-left: 1em;
 }
 
 .completed{
     text-decoration: line-through;
     opacity: 0.5;
+}
+
+.image{
+    max-height: 97%;
+    cursor: pointer;
+    margin-right: 1em;
 }

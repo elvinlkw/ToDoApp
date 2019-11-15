@@ -2,7 +2,6 @@ $(document).ready(function(){
     var $formSubmit = $("#form-id");
     var $showbar = $("#show-input");
     var $input = $("input");
-    var $list = $(".item");
     var list = [];
     var listCount = 0;
 
@@ -10,8 +9,11 @@ $(document).ready(function(){
         e.preventDefault();
         let background;
         let inputText = $input.val();
-        list.text = inputText;
-
+        list.push({
+            text: inputText,
+            completed: false
+        });
+        
         if(listCount % 2 === 0){background = "#eee";}
         else{background = "lightgray";}
 
@@ -20,29 +22,54 @@ $(document).ready(function(){
             "background-color", `${background}`);
         $input.val("");
         listCount += 1;
+        console.log(list);
     });
 
     $showbar.click(function(){
         $input.toggleClass("hidden");
     });
 
-    $("li").click(function(){
+    // Handler for clicking on todo
+    $("#todos").on("click", '.item', function(){
         if($(this).css("opacity") === "0.5"){
             $(this).removeClass("completed");
-            list.completed = false;
+            for(let i = 0; i < list.length;i++){
+                if($.trim($(this).text())=== list[i].text){
+                    list[i].completed = false;
+                    break;
+                }
+            }
         }else{
             $(this).addClass("completed");
-            list.completed = true;
+            for(let i = 0; i < list.length;i++){
+                if($.trim($(this).text())=== list[i].text){
+                    list[i].completed = true;
+                    break;
+                }
+            }
         }
+        console.log(list);
     });
 
-    $(".delete").click(function(){
-        $(this).closest(".item").remove();
+    $("#todos").on("click", '.delete', function(event){
+        event.stopPropagation();
+        $(this).closest('.item').remove();
+    });
+
+    // Handler for managing the delete button to appear
+    $("#todos").on("mouseover", '.item', function(){
+        $(this).find("img").toggleClass("hidden");
+    });
+    $("#todos").on("mouseout", '.item', function(){
+        $(this).find("img").toggleClass("hidden");
     });
 });
 
 function addList(todo){
     return (
-        `<li class="item"><span>X</span> ${todo}</li>`
+        `<li class="item">
+            <img src="img/bin.png" class="delete image hidden"></img>
+            ${todo}
+        </li>`
     );
 }
