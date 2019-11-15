@@ -1,3 +1,6 @@
+body{
+}
+
 .hidden{
     display:none;
 }
@@ -14,6 +17,8 @@
     width: 40%;
     margin: 2em auto; padding: 0;
     border: 2px lightgray solid;
+    box-shadow: 5px 5px 5px 5px #888888;
+    background-color: #fff;
 }
 
 #header-container{

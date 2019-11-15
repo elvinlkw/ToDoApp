@@ -2,7 +2,9 @@ $(document).ready(function(){
     var $formSubmit = $("#form-id");
     var $showbar = $("#show-input");
     var $input = $("input");
-    var $command = $("button");
+    var $hideComplete = $("#btn-hide");
+    var $resolve = $("#btn-resolve");
+    var $delAll = $("#btn-clear");
     var list = [];
     var listCount = 0;
 
@@ -14,10 +16,8 @@ $(document).ready(function(){
             text: inputText,
             completed: false
         });
-        
         if(listCount % 2 === 0){background = "#eee";}
         else{background = "lightgray";}
-
         $('#todos').append(addList(inputText));
         $('.item:last-child').css(
             "background-color", `${background}`);
@@ -65,8 +65,8 @@ $(document).ready(function(){
         $(this).find("img").toggleClass("hidden");
     });
 
-    // Handler for buttons presses
-    $command.click(function(){
+    $hideComplete.click(function(e){
+        e.preventDefault();
         if($(this).text() === "Hide Completed"){
             $(this).text("Show Completed");
             for(let i = 0; i < list.length; i++){
@@ -83,6 +83,34 @@ $(document).ready(function(){
             }
         }
     });
+
+    $resolve.click(function(e){
+        e.preventDefault();
+        for(let i = 0; i < list.length; i++){
+            if(list[i].completed === false){
+                $(`li:nth-child(${i+1})`).addClass("completed");
+                list[i].completed = true;
+            }
+        }
+        if($("#btn-hide").text() === "Show Completed"){
+            for(let i = 0; i < list.length; i++){
+                $(`li:nth-child(${[i+1]})`).hide();
+                list[i].completed = true;
+            }
+        }
+        console.log(list);
+    });
+
+    $delAll.click(function(e){
+        e.preventDefault();
+        if(list.length === 0){
+            alert("Nothing to remove");
+        }else if(confirm("You are about to delete all your tasks. Do you wanna proceed?")){
+            list = [];
+            $("#todos").slideUp();
+            $(".item").remove();
+        }
+    });
 });
 
 function addList(todo){
@@ -92,4 +120,14 @@ function addList(todo){
             ${todo}
         </li>`
     );
+}
+
+// Add Time
+function getCurrentTime(){
+    var month = ['Jan', 'Feb', 'Mar', 'Apr',
+                'May', 'Jun', 'Jul', 'Aug',
+                'Sep', 'Oct', 'Nov', 'Dec'];
+    var dt = new Date();
+    var format = `${month[dt.getMonth()]}, ${dt.getDate()} ${dt.getFullYear()} ${dt.getHours()}:${dt.getMinutes()}`;
+    return format;
 }
